@@ -1,0 +1,105 @@
+﻿@model Webnhatro_1900123.Models.NhaTro
+
+@{
+    ViewData["Title"] = "Đăng tin";
+    Layout = "~/Views/Shared/_Layout -nosearch.cshtml";
+}
+<link rel="stylesheet" href="~/Template/dist/assets/vendors/quill/quill.snow.css"/> 
+@using (Html.BeginForm("Index","Dangtin" ,FormMethod.Post,new { @enctype = "multipart/form-data" }))
+{
+<div id="webpage" class="mt-5 pt-5">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active"><a>Đăng tin</a></li>
+      </ol>
+  </nav>
+        @if(TempData["Thongbao"] != null)
+        {
+          <div class="alert alert-danger">@TempData["Thongbao"] </div>
+        }
+        <div class="row match-height">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header py-3">
+                <h4 class="card-title">Đăng tin nhà trọ</h4>
+            </div>
+            <div class="card-content">
+            <form method="post">
+                <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                
+                                <div class="form-group">
+                                    <label for="first-name-column">Tiêu đề</label>
+                                    <input type="text" class="form-control" placeholder="Nhập tiêu đề..." asp-for="TieuDe" name="TieuDe">
+                                </div>
+                            </div>
+                             <div class="col-12 bg-white col-md-6">
+						        <div class="form-group">
+							        <label for="first-name-icon">Nội dung tin</label>
+							        <div class="position-relative border">
+                                            <input  name="Thongtin" type="hidden" asp-for="Thongtin" >
+								        <div id="editor-container"></div>
+							        </div>
+						        </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label>Địa chỉ</label>
+                                    <select class="form-control my-2"  id="city">
+                                      <option value=""> Tỉnh/Thành phố</option>
+                                    </select>
+                                    <select class="form-control my-2"  id="district">
+                                      <option value=""> Quận/Huyện</option>
+                                    </select>
+                                    <select class="form-control my-2" asp-for="Idxa" name="Idxa" id="ward">
+                                      <option value=""> Xã/Phường</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label >Diện tích</label>
+                                    <input type="number" class="form-control" asp-for="Dientich" name="Dientich" placeholder="Nhập diện tích (m2)">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                              <div class="form-group">
+                                  <label >Giá cho thuê</label>
+                                  <input type="number" class="form-control" asp-for="Gia" name="Gia" placeholder="Nhập giá cho thuê...(VNĐ)">
+                              </div>
+                          </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label >Ảnh</label>
+                                    <input type="file" class="form-control" multiple name="files" asp-for="Anh" accept="image/*" >
+                                </div>
+                            </div>
+                            <div class="alert alert-light-warning color-warning"><i class="bi bi-exclamation-triangle"></i>
+                              Lưu ý: Tất cả thông tin đều bắt buộc, Kiểm tra kỹ thông tin trước khi thực hiện đăng bài</div>
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn btn-success me-1 mb-1 fs-6"> <i class="bi bi-pencil"></i> Đăng </button>
+                                <button type="reset" class="btn btn-light-secondary me-1 mb-1">Hoàn tác</button>
+                            </div>
+                            
+                        </div>
+                </div>
+             </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+}
+
+
+<div>
+    <a asp-action="Index" asp-controller="Home">Về trang chủ</a>
+</div>
+
+<script src="~/js/axios.min.js"></script>
+<script src="~/js/Diadiem.js"></script>
+<script src="~/Template/dist/assets/vendors/quill/quill.min.js"></script>
+<script src="~/js/quillhouse.js"></script>

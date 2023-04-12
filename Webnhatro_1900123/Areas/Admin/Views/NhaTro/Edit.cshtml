@@ -1,0 +1,98 @@
+﻿@model Webnhatro_1900123.Models.NhaTro
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layoutadmin.cshtml";
+}
+<link rel="stylesheet" href="~/Template/dist/assets/vendors/quill/quill.snow.css"/> 
+
+<h1 class="card-title">Thông tin nhà trọ</h1>
+<hr />
+@if (TempData["Thongbao"] != null)
+{
+    <div class="alert alert-warning fs-2"><i class="bi bi-exclamation-triangle"></i> 
+        @TempData["Thongbao"];
+    </div>
+}
+@using (Html.BeginForm("Edit","NhaTro" ,FormMethod.Post,new {@enctype="multipart/form-data"}))
+{
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Idtro" />
+            <div class="form-group">
+                <label asp-for="TieuDe" class="control-label"></label>
+                <input asp-for="TieuDe" class="form-control" />
+                <span asp-validation-for="TieuDe" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <label  class="control-label">Địa Chỉ</label>
+               <div>
+                    <select class="form-select form-select-sm mb-3"  id="city" aria-label=".form-select-sm">
+                    <option value="" selected>Chọn tỉnh thành</option>           
+                    </select>
+          
+                    <select class="form-select form-select-sm mb-3" id="district" aria-label=".form-select-sm">
+                    <option value="" selected>Chọn quận huyện</option>
+                    </select>
+
+                    <select class="form-select form-select-sm" asp-for="Idxa" id="ward" aria-label=".form-select-sm">
+                    <option value="@Model.Idxa" selected="selected"  >Chọn phường xã</option>
+                    </select>
+                </div>    
+             
+            </div>
+            <div class="form-group">
+                <label asp-for="Dientich" class="control-label">Diện tích</label>
+                <input asp-for="Dientich" class="form-control" />
+                <span asp-validation-for="Dientich" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gia" class="control-label"></label>
+                <input asp-for="Gia" class="form-control" />
+                <span asp-validation-for="Gia" class="text-danger"></span>
+            </div>
+            <div class="form-group bg-white">
+                <label asp-for="Thongtin" class="control-label bg-light">Thông tin</label>
+                 <span asp-validation-for="Thongtin" class="text-danger"></span>
+                 <input  name="Thongtin" type="hidden" asp-for="Thongtin" >
+				<div id="editor-container"></div>
+            </div>
+            <div class="form-group" >
+                
+                    <div class="col-md-10">
+                        <label class="=control-label"> Ảnh (Upload lại sẽ xoá ảnh cũ)</label>
+                        <input asp-for="Anh" id="files" name="files" type="file" multiple accept="image/*" />                
+                    </div>
+                </div>
+            <div class="form-group">
+                <label class="control-label">Người đăng</label>
+                <select asp-for="Username" >
+                   <option selected >@Model.Username</option>
+                    </select>
+                
+            </div>
+            <div class="form-group" >
+                <button type="submit" asp-action="Edit" class="button">Lưu</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}
+
+
+<script src="~/js/axios.min.js"></script>
+<script src="~/js/Diadiem.js"></script>
+<script src="~/Template/dist/assets/vendors/quill/quill.min.js"></script>
+<script src="~/js/quillhouse.js"></script>

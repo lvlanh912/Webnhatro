@@ -1,0 +1,63 @@
+﻿@model PaginatedList<Webnhatro_1900123.Models.TinTuc>
+@{
+    ViewData["Title"] = "Tin tức";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="webpage">
+  <main id="main">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Trang chủ</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Tin tức</li>
+      </ol>
+  </nav>
+    <div class="section pt-0">
+      <div class="section-header">
+        <span class="section-title">Tin tức mới nhất</span>
+      </div>
+      <div class="section-content">
+        <div class="home-listing">
+@foreach(var item in Model)
+{
+          <article class="home-item clearfix free ">
+            <figure class="home-thumb">
+              <a asp-action="Chitiet" asp-route-id="@item.Idnews">
+                <img alt="@item.Title" class="lazy_done" src="~/Upload/News/@item.Anh" data-loaded="true">
+              </a>
+              <span class="images-count">1 ảnh</span>
+            </figure>
+            <div class="home-meta">
+              <h4 class="home-title">
+                <a asp-action="Chitiet" asp-route-id="@item.Idnews" style="color: #055699;">
+                   @item.Title</a>
+              </h4>
+              <span class="home-publish">@item.NgayDang.ToString("dd/MM/yyyy")</span>
+            </div>
+          </article>
+}
+        </div>
+        <div style="direction: rtl">Trang @Model.PageIndex / @Model.TotalPages</div>
+            <nav aria-label="Page navigation">
+                <ul class="pagination pagination-danger p-0 m-0">
+                    @if (Model.HasPreviousPage)
+                    {
+                        <li class="page-item">
+                        <a class="page-link" asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)">
+                            <span aria-hidden="true"><i class="bi bi-chevron-left"></i></span>
+                        </a></li>
+                    }
+                        <li class="page-item active"><a class="page-link" >@Model.PageIndex</a></li>
+                    @if (Model.HasNextPage)
+                    {
+                        <li class="page-item">
+                        <a class="page-link" asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)">
+                            <span aria-hidden="true"><i class="bi bi-chevron-right"></i></span>
+                        </a></li>
+                    }
+                </ul>
+            </nav>
+      </div>
+    </div>
+  </main>
+</div>
+

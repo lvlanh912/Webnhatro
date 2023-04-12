@@ -1,0 +1,91 @@
+﻿@model PaginatedList<Webnhatro_1900123.Models.Member>;
+@{
+    ViewData["Title"] = "Danh sách người dùng";
+    Layout = "~/Views/Shared/_Layoutadmin.cshtml";
+}
+
+<h1 >Danh sách thành viên</h1>
+
+<p>
+
+    <a asp-action="Create">Tạo mới thành viên</a>
+</p>
+
+<div class="card">
+<div class="card-header">
+<div class="card-body">
+     <form method="get">
+        <div class="input-group mb-3">
+            <span class="input-group-text" ><i class="bi bi-search"></i></span>
+                                                   
+                <input type="text" class="form-control" placeholder="Nhập username, họ tên hoặc email"  name="Search" value="@ViewData["Search"]" >
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Tìm kiếm</button>
+     
+        </div>
+      </form> 
+<div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+<div class="dataTable-container">
+<table class="table table-striped dataTable-table" >
+    <thead >
+        <tr>
+            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["UserName"]">Username</a></th>
+            <th>Password</th>
+            <th>Số điện thoại</th>
+            <th>Email</th>
+            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["Name"]">Họ Tên</a></th>
+            <th>Địa chỉ</th>
+            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["Date"]">Ngày tham gia</a></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td> <a asp-action="Details" asp-route-id="@item.Username">@item.Username</a></td>
+            <td>@Html.DisplayFor(modelItem => item.Password)</td>
+            <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+            <td>@Html.DisplayFor(modelItem => item.Email)</td>
+            <td>@Html.DisplayFor(modelItem => item.HoTen)</td>
+            <td >@Html.DisplayFor(modelItem => item.Diachi)</td>
+            <td>@Html.DisplayFor(modelItem => item.Ngaythamgia)</td>
+            <td>
+                <form method="post">
+                  <a  class="btn btn-sm btn-info" style="color:#fff" asp-action="Edit" asp-route-id="@item.Username">Sửa</a>
+                   <button class="btn btn-sm btn-danger" style="color:#fff" asp-action="Delete" type="submit" name="id" value="@item.Username">Xoá</button>
+                  </form>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div class="dataTable-bottom">
+    <div class="dataTable-info">Trang @Model.PageIndex / @Model.TotalPages</div>
+	<ul class="pagination pagination-primary float-end dataTable-pagination">
+
+         @if (Model.HasPreviousPage)
+    {
+    <li class="page-item pager"><a asp-action="Index"
+    asp-route-sortOrder="@ViewData["CurrentSort"]" 
+    asp-route-pageNumber="@(Model.PageIndex - 1)"
+    asp-route-currentFilter="@ViewData["CurrentFilter"]" class="page-link" >‹ trang trước</a>
+</li>
+    }
+    @if (Model.HasNextPage)
+    {
+        <li class="page-item pager"><a  asp-action="Index"
+            asp-route-sortOrder="@ViewData["CurrentSort"]"
+            asp-route-pageNumber="@(Model.PageIndex + 1)"
+            asp-route-currentFilter="@ViewData["CurrentFilter"]"
+            class="page-link" >trang sau ›</a>
+        </li>
+    }
+  
+                           
+	
+        </ul>
+</div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>

@@ -1,0 +1,61 @@
+﻿@model Webnhatro_1900123.Models.TinTuc
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layoutadmin.cshtml";
+}
+<link rel="stylesheet" href="~/Template/dist/assets/vendors/quill/quill.snow.css"/> 
+
+<h1>Edit</h1>
+<h4>TinTuc</h4>
+<hr />
+@using (Html.BeginForm("Edit","TinTuc" ,FormMethod.Post,new {@enctype="multipart/form-data"}))
+{
+<div class="card-content">
+	<div class="card-body">
+		 <form class="form form-vertical" asp-action="Edit">
+			 <div class="row">
+				 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Idnews" />
+				 <div class="col-12">
+								<div class="form-group has-icon-left">
+									<label for="first-name-icon">Tiêu đề tin</label>
+									<div class="position-relative">
+								<input type="text" class="form-control" asp-for="Title" placeholder="Nhập tiêu đề">
+										<div class="form-control-icon">
+											<i class="bi-layout-three-columns"></i>
+									</div>
+									</div>
+							</div>
+                  </div>
+				   <div class="col-12">
+								<div class="form-group has-icon-left">
+									<label for="first-name-icon">Ảnh</label>
+									<div class="position-relative">
+								 <input asp-for="Anh" id="files" multiple name="files" type="file" accept="image/*" />  	
+									</div>
+								</div>
+				 </div>
+				  <div class="col-12 bg-white">
+						<div class="form-group">
+							<label for="first-name-icon">Nội dung tin</label>
+							<div class="position-relative">
+								<input  name="NoiDung" type="hidden" asp-for="NoiDung">
+								<div id="editor-container"></div>
+							</div>
+						</div>
+                  </div>
+				 
+			 </div>
+					<input type="submit" value="Save" class="btn btn-primary" />
+		 </form>
+	</div>
+</div>
+}
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<script src="~/Template/dist/assets/vendors/quill/quill.min.js"></script>
+<script src="~/js/app.js"></script>
+@section Scripts {@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

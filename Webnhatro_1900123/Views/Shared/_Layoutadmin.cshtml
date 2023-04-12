@@ -1,0 +1,93 @@
+﻿<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @if (ViewData["Title"] == null)
+    {
+        <title>Trang quản trị</title>
+    }
+    else
+    {
+          <title>@ViewData["Title"]</title>
+    }
+  
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/Template/dist/assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="~/Template/dist/assets/vendors/iconly/bold.css">
+
+    <link rel="stylesheet" href="~/Template/dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="~/Template/dist/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/Template/dist/assets/css/app.css">
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active ps ps--active-y">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <a asp-action="Index" asp-controller="Home"><img src="~/Template/dist/assets/images/logo/logo.png" alt="Logo" srcset=""></a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-menu">
+                    <ul class="menu" >
+                  <li class="sidebar-title" ><a class="sidebar-link"  asp-area="Admin" asp-controller="Home" asp-action="Index">Quản trị</a></li>
+				 <li class="sidebar-title" ><a class="sidebar-link"  asp-area="Admin" asp-controller="Member" asp-action="Index">Quản lý member</a></li>
+				 <li class="sidebar-title" ><a class="sidebar-link"  asp-area="Admin" asp-controller="NhaTro" asp-action="Index">Quản lý nhà trọ</a></li>
+				 <li class="sidebar-title" ><a class="sidebar-link"  asp-area="Admin" asp-controller="TinTuc" asp-action="Index">Quản lý Tin Tức</a></li>
+                 <li class="sidebar-title" ><a class="sidebar-link"  asp-area="" asp-controller="Home" asp-action="Index">Trang người dùng</a></li>
+                  <li class="sidebar-title" ><a class="sidebar-link"  asp-area="Admin" asp-controller="Login" asp-action="Logout">Đăng xuất</a></li>
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 764px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 353px;"></div></div></div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block end-0 pe-1">
+                    <i class="bi bi-justify fs-3" style="display:block"></i>
+                </a>
+            </header>
+            <div class="page-content">
+                <section class="row">
+                    @RenderBody()
+                    
+                </section>
+            </div>
+
+
+
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>2022 © đồ án học phần 2 - ASP-MVC 6.0</p>
+                    </div>
+                    <div class="float-end">
+                        <p>Web phòng trọ <span class="text-danger"><i class="bi bi-heart"></i></span> by <a href="https://www.facebook.com/lanh.lv.39">Lương Văn Lanh</a></p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="~/Template/dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="~/Template/dist/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Template/dist/assets/js/pages/dashboard.js"></script>
+    <script src="~/Template/dist/assets/js/main.js"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+    <script>
+		function openmenu() {
+document.getElementById('wrapper').classList.toggle('toggled');}
+		</script>
+    
+	
+
+</body>
+</html>

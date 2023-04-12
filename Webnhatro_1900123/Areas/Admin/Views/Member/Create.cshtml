@@ -1,0 +1,137 @@
+﻿@model Webnhatro_1900123.Models.Member
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layoutadmin.cshtml";
+}
+
+<h1 class="card-title" >Tạo thành viên mới</h1>
+
+<hr />
+@if (TempData["Thongbao"] != null)
+{
+   <div class="alert alert-danger alert-dismissible show fade"> @TempData["Thongbao"]</div>
+}
+<div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Nhập thông tin thành viên</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <form class="form form-vertical" method="post">
+                                            <div class="form-body">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="form-group has-icon-left">
+                                                            <label for="first-name-icon">Usename</label>
+                                                            <div class="position-relative">
+                                                                <input type="text" class="form-control" asp-for="Username" placeholder="nhập username.." id="first-name-icon">
+                                                                <div class="form-control-icon">
+                                                                    <i class="bi bi-person"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+
+                                                        <div class="form-group has-icon-left">
+                                                            <label for="email-id-icon">Email</label>
+                                                            <div class="position-relative">
+                                                                <input type="text" class="form-control" asp-for="Email" placeholder="Email" id="email-id-icon">
+                                                                <div class="form-control-icon">
+                                                                    <i class="bi bi-envelope"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group has-icon-left">
+                                                            <label for="mobile-id-icon">Số điện thoại </label>
+                                                            <div class="position-relative">
+                                                                <input type="text" class="form-control" asp-for="Phone" placeholder="09876.." id="mobile-id-icon">
+                                                                <div class="form-control-icon">
+                                                                    <i class="bi bi-phone"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group has-icon-left">
+                                                            <label for="password-id-icon">Password</label>
+                                                            <div class="position-relative">
+                                                                <input type="password" class="form-control" asp-for="Password" placeholder="Password" id="password-id-icon">
+                                                                <div class="form-control-icon">
+                                                                    <i class="bi bi-lock"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-12">
+                                                        <div class="form-group has-icon-left">
+                                                            <label for="password-id-icon">Địa chỉ</label>
+                                                            <div class="position-relative">
+                                                                <input type="text" class="form-control" asp-for="Diachi" placeholder="Địa chỉ" id="password-id-icon">
+                                                                <div class="form-control-icon">
+                                                                    <i class="bi-geo-alt"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group has-icon-left">
+                                                            <label for="password-id-icon">Họ Tên</label>
+                                                            <div class="position-relative">
+                                                                <input type="text" class="form-control" asp-for="HoTen" placeholder="Họ Tên">
+                                                                <div class="form-control-icon">
+                                                                    <i class="bi bi-person"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 d-flex justify-content-end">
+                                                        <button type="submit" class="btn btn-primary me-1 mb-1"  style="margin:auto;display:block" asp-action="Create" >Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

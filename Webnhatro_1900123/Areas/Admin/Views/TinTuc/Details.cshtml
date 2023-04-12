@@ -1,0 +1,39 @@
+﻿@model Webnhatro_1900123.Models.TinTuc
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layoutadmin.cshtml";
+}
+
+
+    <div class="row grid-responsive">
+        <div class="column ">
+            <div class="card">
+                <div class="card-title">
+                    <h3>Chi tiết bài viết</h3>
+                </div>
+                <div class="card-block">
+                    <dl>
+                        <dt><b>Tiêu đề</b></dt>
+                        <dd>@Html.DisplayFor(model => model.Title)</dd>
+                        <dt><b>Ảnh</b></dt>
+                        <dd>
+                            @if (!string.IsNullOrEmpty(Model.Anh))
+                            {
+                                <img src="~/Upload/News/@Model.Anh"/>
+                            }  
+                        </dd>
+                            <dt><b>Nội dung</b></dt>
+                            <dd>@Html.Raw(Model.NoiDung)</dd>
+                            <dt><b>Ngày đăng</b></dt>
+                            <dd >@Html.DisplayFor(model => model.NgayDang)</dd>
+                        </dl>    
+						</div>
+					</div>
+				</div>
+			</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Idnews" class="button">Sửa </a> |
+    <a asp-action="Index">Về danh sách</a>
+</div>

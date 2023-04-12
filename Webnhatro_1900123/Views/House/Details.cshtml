@@ -1,0 +1,133 @@
+﻿@model Webnhatro_1900123.Models.Nhatrofull
+@{
+         ViewData["Title"] = Model.ObjNhaTro.TieuDe;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <main role="main"  class="bg-white justify-content-center">
+        <article class="the-home mb-2 shadow">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a asp-action="Index" asp-controller="House" asp-route-T="@Model.ObjTinh.Idtinh"> @Model.ObjTinh.TenTinh </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a asp-action="Index" asp-controller="House" asp-route-Kv="@Model.ObjKhuVuc.IdkhuVuc"> @Model.ObjKhuVuc.TenKhuVuc</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a asp-action="Index" asp-controller="House" asp-route-x="@Model.ObjXa.Idxa"> @Model.ObjXa.TenXa </a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <span> @Model.ObjNhaTro.TieuDe</span>
+                    </li>
+                </ol>
+            </nav>
+            <div class="post-images">
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+
+                        @for (int i = 0; i < Model.ObjNhaTro.Anh.Split(';').Count() - 1; i++)
+                        {
+                            if (i == 0)
+                            {
+                                <div class="carousel-item active">
+                                    <img src="~/Upload/NhaTro/@Model.ObjNhaTro.Anh.Split(';')[i]" class="d-block w-100">
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="carousel-item">
+                                    <img src="~/Upload/NhaTro/@Model.ObjNhaTro.Anh.Split(';')[i]" class="d-block w-100">
+                                </div>
+                            }
+
+                        }
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <header class="the-home-block box-shadow the-home-header">
+                <h1 class="fs-1" style="color: #1b0a7aad;">@Model.ObjNhaTro.TieuDe</h1>
+                <div class="clearfix margin-top-15 margin-bottom-15">
+                    <span class="home-price">Giá thuê <span>@Model.ObjNhaTro.Gia <i>VNĐ/Tháng</i>
+                        </span>
+                    </span>
+                    <span class="home-acreage">Diện tích <span>@Model.ObjNhaTro.Dientich m<sup>2</sup>
+                        </span>
+                    </span>
+                    <span class="home-publish margin-right-0">Cập nhật <span>@Model.ObjNhaTro.Thoigiandang</span>
+                    </span>
+                </div>
+                <address class="home-address">Địa chỉ: @Model.ObjTinh.TenTinh,@Model.ObjKhuVuc.TenKhuVuc,@Model.ObjXa.TenXa</address>
+            </header>
+
+            <div class="the-home-block box-shadow">
+                <h2 class="block-title">Thông tin mô tả</h2>
+                <div class="the-home-detail-content">
+                        @Html.Raw(Model.ObjNhaTro.Thongtin)
+    
+                </div>
+            </div>
+            <div class="the-home-block box-shadow">
+                <h2 class="block-title">Thông tin người đăng tin</h2>
+                <div class="the-home-detail-content pb-2">
+                    <p><i class="bi bi-person-fill"></i><strong> @Model.objMember.HoTen</strong></p>
+                    <p><i class="bi bi-phone-fill"></i> @Model.objMember.Phone</p>
+                    <p><i class="bi bi-pencil-fill"></i> @Model.objMember.Email</p>
+                    <p><i class="bi bi-geo-alt"></i> @Model.objMember.Diachi</p>
+                </div>
+            </div>
+        </article>
+        <section class="section shadow mt-3">
+            <div class="section-header">
+                <div class="section-title">Tin đăng cùng khu vực</div>
+            </div>
+            <div class="section-content">
+                <div class="home-listing">
+                    @if (ViewData["Samelocation"] != null)
+                        @foreach (var item in ViewData["Samelocation"] as List<Nhatrofull>)
+                        {
+
+                            <article class="home-item clearfix normal ">
+                                <figure class="home-thumb">
+                                    <a asp-action="Details" asp-controller="House" asp-route-id="@item.ObjNhaTro.Idtro">
+                                        <img  class="lazy_done" src="~/Upload/NhaTro/@item.ObjNhaTro.Anh.Split(';')[0]" data-loaded="true">
+                                    </a>
+                                    <span class="home-save js-btn-save" data-post-id="200136138">
+                                        <i class="icon heart white size-20 margin-right-0"></i>
+                                    </span>
+                                    <span class="images-count">@(item.ObjNhaTro.Anh.Split(';').Count()-1)</span>
+                                </figure>
+                                <div class="home-meta">
+                                    <h4 class="home-title">
+                                        <a asp-action="Details" asp-controller="House" asp-route-id="@item.ObjNhaTro.Idtro"  style="color: #055699;" >
+                                            @item.ObjNhaTro.TieuDe </a>
+                                    </h4>
+                                    <div class="meta-row clearfix">
+                                        <span class="home-price">@item.ObjNhaTro.Gia <i>VNĐ/Tháng</i>
+                                        </span>
+                                    </div>
+                                    <div class="meta-row clearfix">
+                                        <span class="home-acreage">@item.ObjNhaTro.Dientich m<sup>2</sup>
+                                        </span>
+                                    </div>
+                                    <span class="home-location">
+                                        @item.ObjXa.TenXa-@item.ObjKhuVuc.TenKhuVuc-@item.ObjTinh.TenTinh
+                                    </span>
+                                    <span class="home-publish">@item.ObjNhaTro.Thoigiandang.ToString("dd/MM/yyyy")</span>
+                                </div>
+                            </article>
+                        }
+                </div>
+    </div>
+  </section>
+</main>
+
+

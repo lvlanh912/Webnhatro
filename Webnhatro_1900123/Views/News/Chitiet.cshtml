@@ -1,0 +1,56 @@
+﻿@model Webnhatro_1900123.Models.TinTuc
+@{
+    ViewData["Title"] = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<main id="main" class="bg-white">
+        <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Trang chủ</a></li>
+           <li class="breadcrumb-item"><a asp-action="Index" asp-controller="News">Tin tức</a></li>
+          <li class="breadcrumb-item active maxleng" aria-current="page">@Model.Title</li>
+      </ol>
+  </nav>
+  <article class="the-article">
+    <header class="page-header ps-0 pt-0 pb-2" >
+      <h1 class="page-h1">@Model.Title</h1>
+    </header>
+    <div class="article-main-content">
+      <figure style="text-align: center;">
+        <img class="h-auto" src="~/Upload/News/@Model.Anh" title="@Model.Title">
+        <figcaption>@Model.Title</figcaption>
+      </figure>
+      <p>@Html.Raw(Model.NoiDung)</p>
+      <h2>&nbsp;</h2>
+      <div class="float-end fs-6">Đăng ngày @Model.NgayDang.ToString("dd/MM/yyyy lúc hh:MM")</div>
+    </div>
+  </article>
+  <section class="section py-0">
+    <div class="section-header">
+      <h3 class="section-title h1">Có thể bạn quan tâm</h3>
+    </div>
+    <div class="blog-listing">
+      <div class="inner">
+    @foreach(var item in ViewBag.List as List<TinTuc>)
+    {
+        <article class="article-item clearfix">
+          <a asp-action="Chitiet" asp-route-id="@item.Idnews" title="@item.Title">
+            <figure>
+              <img  src="~/Upload/News/@item.Anh" alt="@item.Anh">
+            </figure>
+            <div class="article-meta">
+              <h3 class="article-title">@item.Title</h3>
+              <div class="article-publish">
+                <i class="icon clock size-14 margin-right-2"></i> @item.NgayDang.ToString("dd/MM/yyyy")
+              </div>
+            </div>
+          </a>
+        </article>
+    }
+      </div>
+    </div>
+  </section>
+</main>
+
+
+

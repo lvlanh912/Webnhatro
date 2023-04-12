@@ -1,0 +1,29 @@
+﻿@model Webnhatro_1900123.Models.Member
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layoutadmin.cshtml";
+}
+
+<h4 class="card-title">Chi tiết thành viên</h4>
+
+<div class="row grid-responsive">
+    <div class="column ">
+			<div class="card">
+                        <hr />
+                       <dl>
+                           <dt><b>Username</b></dt><dd>@Model.Username</dd>
+                           <dt><b>Mật khẩu</b></dt><dd>@Model.Password</dd>
+                           <dt><b>Diện tích</b></dt><dd>@Model.HoTen</dd>
+                           <dt><b>Giá</b></dt><dd>@Model.Diachi</dd>
+                           <dt><b>Thông tin</b></dt><dd>@Model.Email</dd>
+                           <dt><b>Số điện thoại</b></dt><dd>@Model.Phone</dd>
+                           <dt><b>Ngày tham gia</b></dt><dd>@Model.Ngaythamgia</dd>
+                       </dl>    
+            </div>
+    </div>
+ </div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Username" class="button">Sửa</a> 
+        <a asp-action="Index">Về danh sách</a>
+</div>

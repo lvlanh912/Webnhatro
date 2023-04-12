@@ -1,0 +1,45 @@
+﻿@model Webnhatro_1900123.Models.NhaTro
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layoutadmin.cshtml";
+}
+<h4>Thông tin Nhà Trọ</h4>
+<div class="row grid-responsive">
+    <div class="column ">
+					<div class="card">
+                        <hr />
+                       <dl>
+                           <dt><b>Ảnh</b></dt>
+                           <dd>
+                               @if(Model.Anh!=null)
+                               @foreach (var anh in Model.Anh.Split(';'))
+                               { 
+                                   if (anh.Length != 0)
+                                   {
+                                     <img style="width:132px;height132px" src="~/Upload/NhaTro/@anh"/>
+                                   }
+                        
+                                }  
+                           </dd>
+                           <dt><b>Tiêu đề</b></dt><dd>@Model.TieuDe</dd>
+                           <dt><b>Địa chỉ</b></dt><dd>@ViewData["DiaChi"]</dd>
+                           <dt><b>Diện tích</b></dt><dd>@Model.Dientich</dd>
+                           <dt><b>Giá</b></dt><dd>@Model.Gia.ToString("#,###") VNĐ</dd>
+                           <dt><b>Thông tin</b></dt><dd>@Html.Raw(Model.Thongtin)</dd>
+                           <dt><b>Thời gian đăng</b></dt><dd>@Model.Thoigiandang</dd>
+                           <dt><b>Người đăng</b></dt><dd>@Model.Username</dd>
+       
+                       </dl>    
+                     </div>
+    </div>
+ </div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Idtro" class="button">Sửa</a> |
+    <a asp-action="Index">Về danh sách</a>
+</div>
+<script>
+    var myCarousel = document.querySelector('#myCarousel')
+var carousel = new bootstrap.Carousel(myCarousel)
+</script>

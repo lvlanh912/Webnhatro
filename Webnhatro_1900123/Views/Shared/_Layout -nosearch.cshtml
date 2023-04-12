@@ -1,0 +1,139 @@
+﻿@{
+   string name= Context.Session.GetString("Fullname");
+       if (ViewData["Title"] == null)
+    {
+         ViewData["Title"] = "Trang chủ-Webthuetro";
+    }
+}
+<html lang="vi"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
+       <title>@ViewData["Title"]</title>
+    <meta name="robots" content="index,follow">
+    <meta name="keywords" content="thue phong tro, cho thuê phòng trọ, tim phong tro, thue nha tro, phòng trọ, nhà trọ">
+     <meta name="placename" content="Việt Nam">
+    <link rel="icon" href="User/images/favicon.ico">
+  <link rel="stylesheet" href="~/Template/dist/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="~/Template/dist/assets/vendors/iconly/bold.css">
+    <link rel="stylesheet" href="~/Template/dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="~/Template/dist/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/app.css">
+</head>
+<body class="bg-light">    
+  <nav class="navbar navbar-fixed bg d-flex w-100 opacity-100 shadow">
+    <div class="px-1">
+      <a asp-action="Index" asp-controller="Home">
+        <img class="logo" src="/logo.png" alt="icon">
+      </a>
+    </div>
+    <div class="end-0 position-absolute">
+      <button class="navbar-toggler me-1 text-dark collapsed" type="button" onclick="sidebar()">
+        <i class="bi bi-justify fs-3"></i>
+      </button>
+    </div>    
+  </nav>
+  <div id="sidebar" class="pt-2">
+    <div class="sidebar-wrapper active bg-light">
+        <div class="sidebar-header py-0">
+            <div class="d-flex justify-content-between">
+                @if(!string.IsNullOrEmpty(name))
+                {
+                <div>
+                    <span class="fs-5 font-bold text-dark">Xin chào,@name</span>
+                </div>
+                }
+                 else
+                {
+                <div class="fs-6 mt-4 mb-0">
+                    <a asp-action="Dangnhap" asp-controller="Home"> Đăng nhập</a>/
+                    <a asp-action="Dangky" asp-controller="Home"> Đăng ký</a>
+                </div>
+                }
+                <div class="toggler">
+                    <a onclick="sidebar()" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-menu h-auto">
+            <ul class="menu" onclick="activesidebar(event)">
+                <li class="sidebar-title">Menu</li>
+                <li class="sidebar-item">
+                    <a asp-action="Index" asp-controller="Home" class="sidebar-link">
+                        <i class="bi bi-grid-fill"></i>
+                        <span>Trang chủ</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a asp-action="Index" asp-controller="House" class="sidebar-link">
+                        <i class="bi bi-house-fill"></i>
+                        <span>Nhà trọ</span>
+                    </a>
+                </li>
+                <li class="sidebar-item  ">
+                  <a asp-action="Index" asp-controller="News" class="sidebar-link">
+                      <i class="bi bi-newspaper"></i>
+                      <span>Tin tức</span>
+                  </a>
+              </li>
+              <li class="sidebar-item  ">
+                <a  asp-action="Index" asp-controller="Dangtin" class="sidebar-link">
+                    <i class="bi bi-pencil-fill"></i>
+                    <span>Đăng tin</span>
+                </a>
+            </li>
+            </ul>
+        </div>
+        <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+    @if (!string.IsNullOrEmpty(name))
+            {
+                <div class="position-absolute bottom-0 w-100 ">
+                    <a asp-action="logout" asp-controller="Home" class="btn btn-primary font-bold w-100">Đăng xuất 
+                        <svg class="fa-sign-out-alt icon" data-icon="sign-out-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                        <path fill="currentColor" d="M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z"></path>
+                        </svg>
+                    </a>
+                 </div>
+      }
+    <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 864px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 452px;"></div></div></div>
+  </div>
+
+
+    @RenderBody();
+
+<footer>
+  <div class="container">
+        <div class="col  text-center">
+          <div class="row">
+            <div class="border-top pt-3">
+              <div class="company">
+                  <p>
+                    <strong>Cho thuê phòng trọ nhanh chóng và hiệu quả</strong>
+                  </p>
+                  <p>CSKH: 0363.598.860</p>
+                  <p>Email: webthuetro@gmail.com</p>
+                  <p>Copyright © 2022 webthuetro.com</p>
+                  <p>Địa chỉ: 74 - Phố Hữu Nghị - Phường Xuân Khanh - TX.Sơn Tây - Hà Nội</p>
+                  <span class="fs-6">Đồ án học phần 2 - ASP.NET MVC</span>
+                </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+</footer>
+</body>
+<script src="~/Template/dist/assets/js/main.js"> </script>
+<script src="~/Template/dist/assets/js/bootstrap.bundle.min.js"> </script>
+<script src="~/js/axios.min.js"></script>
+<script src="~/js/Diadiem.js"></script>
+<script>
+      function sidebar(){
+    document.getElementById('sidebar').classList.toggle('active')
+  }
+</script>
+@section Scripts 
+{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+</html>

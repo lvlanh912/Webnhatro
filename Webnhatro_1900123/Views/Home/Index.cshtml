@@ -1,0 +1,152 @@
+﻿@model PaginatedList<Webnhatro_1900123.Models.Nhatrofull>
+@{
+    ViewData["Title"] = "Web Nhà trọ by Lvlanh";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="webpage">
+  <main id="main">
+       @if(TempData["Messenger"] != null)
+        {
+            <div id="toast" class="alert alert-success alert-dismissible show fade bottom-3 end-0 position-fixed"><i class="bi bi-check-circle"></i> @TempData["Messenger"]</div>
+        }
+    <div class="section section-top-location bg-white">
+      <div class="section-content">
+        <div class="top-location city d-flex">
+         <a class="location-item city-1" asp-action="Index" asp-controller="House" asp-route-T="79" title="Cho thuê nhà Hồ Chí Minh">
+            <i></i>
+            <span>Cho thuê nhà <span class="city-name">Hồ Chí Minh</span>
+            </span>
+          </a>
+          <a class="location-item city-2" asp-action="Index" asp-controller="House" asp-route-T="01" title="Cho thuê nhà Hà Nội">
+            <i></i>
+            <span>Cho thuê nhà <span class="city-name">Hà Nội</span>
+            </span>
+          </a>
+          <a class="location-item city-4" asp-action="Index" asp-controller="House" asp-route-T="48" title="Cho thuê nhà Đà Nẵng">
+            <i></i>
+            <span>Cho thuê nhà <span class="city-name">Đà Nẵng</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">Danh sách nhà trọ đã đăng</span>
+      </div>
+      <div class="section-content">
+        <div class="home-listing ">
+          <ul class="home-sort clearfix pt-2" id="sort">  
+              <span>Sắp xếp: </span>
+            <li>
+              <a  class="active">Mặc định</a>
+            </li>
+           <li>
+              <a class="" asp-controller="House" asp-action="Index" asp-route-sortOrder="moinhat">Mới nhất</a>
+            </li>
+            <li>
+              <a class="" asp-controller="House" asp-action="Index" asp-route-sortOrder="price">Giá thấp nhất</a>
+            </li>
+             <li>
+              <a class="" asp-controller="House" asp-action="Index" asp-route-sortOrder="price_desc">Giá cao nhất</a>
+            </li>
+          </ul>
+@foreach(var item in Model)
+{
+        <article class="home-item clearfix free ">
+            <figure class="home-thumb">
+                <a asp-controller="House" asp-action="Details" asp-route-id="@item.ObjNhaTro.Idtro" >
+                    <img alt="@item.ObjNhaTro.TieuDe" class="lazy_done" src="~/Upload/NhaTro/@item.ObjNhaTro.Anh.Split(';')[0]" data-loaded="true">
+                </a>
+              <span class="home-save js-btn-save" data-post-id="200136712">
+                <i class="icon heart white size-20 margin-right-0"></i>
+              </span>
+              <span class="images-count">@(item.ObjNhaTro.Anh.Split(';').Length-1) ảnh</span>
+            </figure>
+            <div class="home-meta">
+              <h4 class="home-title">
+                <a title="@item.ObjNhaTro.TieuDe" style="color: #055699;" asp-controller="House" asp-action="Details" asp-route-id="@item.ObjNhaTro.Idtro">
+                  @item.ObjNhaTro.TieuDe </a>
+              </h4>
+              <div class="meta-row clearfix">
+                <span class="home-price">@item.ObjNhaTro.Gia.ToString("#,###") <i>VNĐ</i>
+                </span>
+              </div>
+              <div class="meta-row clearfix">
+                <span class="home-acreage">@item.ObjNhaTro.Dientich m<sup>2</sup>
+                </span>
+              </div>
+              <span class="home-location">
+                 @item.ObjXa.TenXa-@item.ObjKhuVuc.TenKhuVuc-@item.ObjTinh.TenTinh
+              </span>
+              <span class="home-publish">@item.ObjNhaTro.Thoigiandang.ToString("dd/MM/yyyy")</span>
+            </div>
+          </article>
+}
+        </div>
+   <div style="direction: rtl">Trang @Model.PageIndex / @Model.TotalPages</div>
+        <nav aria-label="Page navigation">
+                    <ul class="pagination pagination-danger p-0 m-0">
+                        @if (Model.HasPreviousPage)
+                        {
+                             <li class="page-item"><a class="page-link" 
+                                        asp-action="Index"
+                                        asp-route-sortOrder="@ViewBag.sortOrder" 
+                                        asp-route-pageNumber="@(Model.PageIndex - 1)"
+                                        asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                                 <span aria-hidden="true"><i class="bi bi-chevron-left"></i></span></a>
+                             </li>
+                        }
+                         <li class="page-item active"><a class="page-link" >@Model.PageIndex</a></li>
+                        @if (Model.HasNextPage)
+                        {
+                             <li class="page-item"><a class="page-link" asp-action="Index"
+                                asp-route-sortOrder="@ViewBag.sortOrder" 
+                                asp-route-pageNumber="@(Model.PageIndex - 1)"
+                                asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                                <span aria-hidden="true"><i class="bi bi-chevron-right"></i></span>
+                              </a></li>
+                        }
+                    </ul>
+        </nav>
+      </div>
+    </div>
+  <div class="section">
+      <div class="section-header">
+            <span class="section-title">Tin tức mới</span>
+      </div>
+      <section class="section bg-white py-0">
+        <div class="blog-listing">
+          <div class="inner">
+@foreach(var news in ViewData["News"] as List<TinTuc>)
+{
+            <article class="article-item clearfix py-0">
+                <a asp-action="Chitiet" asp-controller="News" asp-route-id="@news.Idnews" title="@news.Title">
+                <figure>
+                    <img src="~/Upload/News/@news.Anh.Split(';')[0]" alt="@news.Title" title="@news.Title">
+                </figure>
+                <div class="article-meta">
+                    <h3 class="article-title">@news.Title</h3>
+                    <div class="article-publish">
+                    <i class="icon clock size-14 margin-right-2"></i> @news.NgayDang.ToString("dd/MM/yyyy")
+                    </div>
+                </div>
+                </a>
+            </article>
+}
+          </div>
+        </div>
+      </section>
+</div>
+  </main>
+</div>
+<script src="~/js/axios.min.js"></script>
+<script src="~/js/Diadiem.js"></script>
+<script>
+setTimeout(() => {
+    const toast = document.getElementById('toast');
+    toast.style.display = 'none';
+}, 3000);
+</script>

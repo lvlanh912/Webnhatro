@@ -1,0 +1,110 @@
+﻿
+@{
+    Layout = null;
+    ViewData["Title"] = "Đăng ký";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký - Webthuetro.com</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/Template/dist/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="~/Template/dist/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/Template/dist/assets/css/app.css">
+    <link rel="stylesheet" href="~/Template/dist/assets/css/pages/auth.css">
+</head>
+
+<body class="bg-light">
+@using (Html.BeginForm("Dangky","Home",FormMethod.Post))
+{
+    <div class="card mx-4 my-4 position-relative">
+        <div class="mb-3">
+              <a asp-action="Index" asp-controller="Home"><img src="~/logo.png" style="width:200px" alt="Logo"></a>
+        </div>
+            <div class="col-12">
+                <div class="card py-2">
+                    <div class="card-header">
+                        <h4 class="card-title">Đăng Ký thành viên</h4>
+                    </div>
+                    @if (TempData["thongbao"]!=null)
+                    {
+                       <div class="alert alert-light-danger color-danger"><i class="bi bi-exclamation-circle"></i>@TempData["thongbao"]</div>
+                    }
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-xl-6">
+                                <label>Tên người dùng</label>
+                                <div class="form-group position-relative has-icon-left">
+                                    <input type="text" class="form-control" placeholder="Nhập username" name="Username">
+                                    <div class="form-control-icon">
+                                        <i class="bi bi-person"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-6">
+                                <label>Mật khẩu</label>
+                                <div class="form-group position-relative has-icon-left">
+                                    <input type="password" class="form-control" placeholder="********" name="Password">
+                                    <div class="form-control-icon">
+                                        <i class="bi bi-shield-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-xl-6">
+                                <label>Số điện thoại</label>
+                                <div class="form-group position-relative has-icon-left">
+                                    <input type="tel" class="form-control" placeholder="098..." name="Phone" pattern="[0-9]{10}" title="bao gồm 10 chữ số">
+                                    <div class="form-control-icon">
+                                        <i class="bi bi-phone"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-6">
+                                <label>Email</label>
+                                <div class="form-group position-relative has-icon-left">
+                                    <input type="email" class="form-control" placeholder="abc@example.com" name="Email">
+                                    <div class="form-control-icon">
+                                        <i class="bi bi-mailbox"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-6">
+                                <label>Họ và tên</label>
+                                <div class="form-group position-relative has-icon-left">
+                                    <input type="text" class="form-control" placeholder="Nguyễn Văn A...." name="HoTen">
+                                    <div class="form-control-icon">
+                                        <i class="bi bi-card-list"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-6">
+                                <label>Địa chỉ</label>
+                                <div class="form-group position-relative has-icon-left">
+                                    <input type="text" class="form-control" placeholder="Số nhà-Phường...." name="Diachi">
+                                    <div class="form-control-icon">
+                                        <i class="bi bi-geo-alt"></i>
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn-primary px-4" type="submit" >Đăng ký</button>
+                        </div>
+                        <div class="mt-4 d-flex justify-content-center">
+                            Đã có tài khoản? <a asp-action="Dangnhap" asp-controller="Home">Đăng Nhập</a>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+    </div>
+}
+</body>
+
+</html>

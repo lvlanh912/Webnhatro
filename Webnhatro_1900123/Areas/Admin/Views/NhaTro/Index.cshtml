@@ -1,0 +1,108 @@
+﻿@model PaginatedList<Webnhatro_1900123.Models.Nhatrofull>
+@{
+    ViewData["Title"] = "phòng trọ đã đăng";
+    Layout = "~/Views/Shared/_Layoutadmin.cshtml";
+}
+
+<h1 class="card-title">Danh sách nhà trọ</h1>
+
+<p>
+    <a  asp-action="Create">Tạo mới</a>
+</p>
+<div class="card">
+<div class="card-header p-0">
+<div class="card-body p-0">
+    	<form method="get">
+            <div class="btn-group dropdown me-1 mb-1">
+                <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
+                    <span class="sr-only">Lọc theo mức giá</span>
+                </button>
+                <div class="dropdown-menu" style="margin: 0px;">
+                    <button type="submit" class="dropdown-item" asp-action="Index"  name="price" value="1" >Dưới 1 triệu</button>
+                    <button  type="submit"  class="dropdown-item" asp-action="Index" name="price" value="2">Từ 1 đến 3 triệu</button>
+                    <button type="submit"  class="dropdown-item" asp-action="Index" name="price" value="3" >Từ 3 đến 7 triệu</button>
+                    <button type="submit"  class="dropdown-item" asp-action="Index" name="price" value="4">Trên 7 triệu</button>
+                </div>
+             </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" ><i class="bi bi-search"></i></span>
+                                                   
+                <input type="text" class="form-control" placeholder="Nhập Tiêu đề, Giá,Diện tích hoặc Người đăng"  name="Search" value="@ViewBag.Search" >
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Tìm kiếm</button>
+        </div>
+      </form> 
+<div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+<div class="dataTable-container">
+<table class="table table-striped dataTable-table" >
+                    <thead  role="rowgroup">
+                        <tr role="row">
+                            <th>Tiêu đề</th>
+                            <th ><a  asp-action="Index" asp-route-sortOrder="@ViewBag.Dientich"   >Diện tích</a></th>
+                            <th ><a  asp-action="Index" asp-route-sortOrder="@ViewBag.Gia" >Giá</a></th>
+                            <th >Ảnh</th>
+                            <th ><a asp-action="Index" asp-route-sortOrder="@ViewBag.Date" > Thời gian</a></th>
+                            <th >Địa chỉ</th>
+                            <th ><a asp-action="Index" asp-route-sortOrder="@ViewBag.UserName">Người đăng</a> </th>
+               
+                        </tr>
+                    </thead>
+        <tbody  role="rowgroup">
+        @foreach (var item in Model) 
+        {
+                        <tr  role="row">
+                            <td >
+                              <a asp-action="Details" asp-route-id="@item.ObjNhaTro.Idtro" >@item.ObjNhaTro.TieuDe </a>
+                             </td>
+                            <td>@Html.DisplayFor(modelItem => item.ObjNhaTro.Dientich) m2</td>
+                            <td>@item.ObjNhaTro.Gia.ToString("#,###")</td>
+                            <td>
+                            <a asp-action="Details" asp-route-id="@item.ObjNhaTro.Idtro">@(item.ObjNhaTro.Anh.Split(';').Count()-1). Ảnh </a>
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.ObjNhaTro.Thoigiandang)</td>
+                            <td>
+                               @item.ObjXa.TenXa - @item.ObjKhuVuc.TenKhuVuc - @item.ObjTinh.TenTinh
+                            </td>
+                            <td> @Html.DisplayFor(modelItem => item.ObjNhaTro.Username)</td>
+                            <td>
+                                <a class="btn btn-sm btn-info" style="color:#fff" asp-action="Edit" asp-route-id="@item.ObjNhaTro.Idtro">Sửa</a>
+                                 <form method="post">
+                                    <button class="btn btn-sm btn-danger" style="color:#fff" style="color:#fff" asp-action="Delete" type="submit" name="id" asp-route-id="@item.ObjNhaTro.Idtro"  value="@item.ObjNhaTro.Idtro">Xoá</button>
+                                </form>
+                            </td>
+                        </tr>
+       }
+
+           </tbody>
+        </table>
+        @if( Model.TotalPages!=0)
+        {
+
+                    <div class="dataTable-bottom">
+                <div class="dataTable-info">Trang @Model.PageIndex / @Model.TotalPages</div>
+                <ul class="pagination pagination-primary float-end dataTable-pagination">
+
+                     @if (Model.HasPreviousPage)
+            {
+                <li class="page-item pager"><a asp-action="Index"
+            asp-route-sortOrder="@ViewData["CurrentSort"]" 
+            asp-route-pageNumber="@(Model.PageIndex - 1)"
+            asp-route-currentFilter="@ViewData["CurrentFilter"]" class="page-link" >‹ trang trước</a></li>
+            }
+                @if (Model.HasNextPage)
+            {
+                    <li class="page-item pager"><a  asp-action="Index"
+                    asp-route-sortOrder="@ViewData["CurrentSort"]"
+                    asp-route-pageNumber="@(Model.PageIndex + 1)"
+                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                    class="page-link" >trang sau ›</a></li>
+            }
+              </ul>
+
+            </div>
+        }
+ </div>
+</div>
+</div>
+</div>
+</div>
+
